@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.gyf.barlibrary.ImmersionBar;
-import com.jiyun.huanpet.R;
 import com.jiyun.huanpet.presenter.baseapi.BasePresenter;
 
 import java.lang.reflect.ParameterizedType;
@@ -19,7 +17,7 @@ import java.lang.reflect.Type;
 
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView{
     private BaseFragment lastFragment;
-    private P mPresenter;
+    public P mPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
