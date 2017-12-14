@@ -22,21 +22,21 @@ public class FosterteacherActivity extends AppCompatActivity  implements View.On
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fosterteacher);
-        comment = (Button) findViewById(R.id.comment);
-        comment.setOnClickListener(this);
-        appointment = (Button) findViewById(R.id.appointment);
-        appointment.setOnClickListener(this);
+//        comment = (Button) findViewById(R.id.comment);
+//        comment.setOnClickListener(this);
+//        appointment = (Button) findViewById(R.id.appointment);
+//        appointment.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.comment :
-                  startActivity(new Intent(this,CommentActivity.class));
-                break;
-            case R.id.appointment :
-                 startActivity(new Intent(this,AppointmentActivity.class));
-                break;
+//            case R.id.comment :
+//                  startActivity(new Intent(this,CommentActivity.class));
+//                break;
+//            case R.id.appointment :
+//                 startActivity(new Intent(this,AppointmentActivity.class));
+//                break;
         }
     }
 }
