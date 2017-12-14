@@ -17,7 +17,7 @@ import java.lang.reflect.Type;
  * Created by mengYao on 2017/12/7.
  */
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity{
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView{
     private BaseFragment lastFragment;
     private P mPresenter;
     @Override
@@ -26,6 +26,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         setContentView(getLayoutId());
 //        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.primary).init();
         mPresenter = getPresenter();
+        mPresenter.attchTo(this);
         findViewById();
         init();
         loadData();
