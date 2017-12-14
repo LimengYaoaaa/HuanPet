@@ -74,6 +74,17 @@
             android:name="UMENG_APPKEY"
             android:value="5a3090f6f29d987b7d000021" >
         </meta-data>
+
+
+
+        <meta-data android:name="com.amap.api.v2.apikey"
+            android:value="ca080404adce3d231d202f435765f0b0"/>
+        <activity
+            android:name="com.zaaach.citypicker.CityPickerActivity"
+            android:theme="@style/CityPicker.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
     </application>
 
 </manifest>
