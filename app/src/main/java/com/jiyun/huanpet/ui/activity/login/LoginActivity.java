@@ -1,6 +1,7 @@
 package com.jiyun.huanpet.ui.activity.login;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,11 @@ import com.jiyun.huanpet.presenter.contract.LoginContract;
 import com.jiyun.huanpet.presenter.presenter.LoginPresenterImpl;
 import com.jiyun.huanpet.ui.activity.home.activity.HomeActivity;
 import com.jiyun.huanpet.ui.base.BaseActivity;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 /**
  * Created by mengYao on 2017/12/9.
@@ -79,14 +85,66 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl> implements L
                 startActivity(new Intent(this,RegisterActivity.class));
                 break;
             case R.id.mWxLogin:
-                startActivity(new Intent(this,BindPhoneActivity.class));
+                UMShareAPI.get(this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+                    }
+                    @Override
+                    public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                        Intent intent = new Intent(LoginActivity.this, BindPhoneActivity.class);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+                    }
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media, int i) {
+                    }
+                });
+
                 break;
             case R.id.mQqLogin:
-                startActivity(new Intent(this,BindPhoneActivity.class));
+                UMShareAPI.get(this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, new UMAuthListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+
+                    }
+                    @Override
+                    public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+                        String uid = map.get("name");
+                        String iconurl = map.get("iconurl");
+                        Intent intent = new Intent(LoginActivity.this, BindPhoneActivity.class);
+
+                        intent.putExtra("name",uid);
+                        intent.putExtra("img",iconurl);
+                        startActivity(intent);
+                        Log.e("name",uid);
+                        Log.e("iconurl",uid);
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media, int i) {
+
+                    }
+                });
+
+
+
                 break;
             case R.id.mLoginBack:
                 finish();
                 break;
         }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }
